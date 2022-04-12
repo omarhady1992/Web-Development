@@ -11,42 +11,50 @@ const UNCHECK = "fa-circle-o";
 const lineThrough = "line-through";
 
 
+
 //show today's day
 const options = { weekday: "long", month: "short", day: "numeric" };
 const today = new Date();
 dateelement.innerHTML = today.toLocaleDateString("en-us", options);
 
-//insert adjacent elements
-
-
 
 //Add to do
 function add_todo(todo, id, done, trash) {
+
+    if (trash) { return; }
+    const DONE = done ? CHECK : UNCHECK;
+    const LINE = done ? CHECK : UNCHECK;
+
     const item = ` <li class="item" id=${id}>
-     <div><i class="fa fa-circle-o co" job="complete"></i></div>
-     <p class="text">${todo} </p>
+     <div><i class="fa ${DONE} co" job="complete"></i></div>
+     <p class="text ${LINE}">${todo} </p>
      <div class="delete">
          <i class="fa fa-trash-o" job="delete"></i></div></li>
      
      `;
     const position = "beforeend";
+    //insert adjacent elements
     list.insertAdjacentHTML(position, item);
 
 }
 
+input.addEventListener("keyup", (e) => {
+            if (e.key == 13) {
+                const todo = input.value;
+                if (todo) {
+                    add_todo(todo, id, done, trash);
+                    LIST.push({}
+                    })
 
 
 
 
-
-//store todo 
-
+                //store todo 
 
 
 
-//remove to do
+                //remove to do
 
 
 
-
-//update to do
+                //update to do
