@@ -98,3 +98,24 @@ function removetodo(element) {
     element.parentNode.parentNode.removeChild(element.parentNode);
     LIST[element.id].trash = true;
 }
+// Complete todo
+completetodo = (element) => {
+        element.classlist.toggle(CHECK);
+        element.classlist.toggle(UNCHECK);
+        element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
+
+        LIST[element.id].done = LIST[element.id].done ? false : true;
+    }
+    //Target dynamic element
+list.addEventListener("click", (e) => {
+    const element = e.target;
+    const job = element.attributes.job.value;
+
+    if (job == "complete") {
+        completetodo(element);
+
+    } else {
+        removetodo(element);
+    }
+    localStorage.setItem("TODO", JSON.stringify(LIST));
+});
