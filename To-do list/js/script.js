@@ -21,9 +21,12 @@ const options = { weekday: "long", month: "short", day: "numeric" };
 const today = new Date();
 dateelement.innerHTML = today.toLocaleDateString("en-us", options);
 
+//STORAGE
+//Check  if there is data
+
 
 //Add to do
-function add_todo(todo, id = 0, done = false, trash = false) {
+function add_todo(todo, id, done = false, trash = false) {
 
     if (trash) { return; }
     const DONE = done ? CHECK : UNCHECK;
@@ -39,6 +42,10 @@ function add_todo(todo, id = 0, done = false, trash = false) {
     const position = "beforeend";
     //insert adjacent elements
     list.insertAdjacentHTML(position, item);
+    //add to local storage
+    localStorage.setItem("TODO", JSON.stringify(LIST);)
+
+
 
 }
 
