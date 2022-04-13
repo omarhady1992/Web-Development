@@ -22,7 +22,29 @@ const today = new Date();
 dateelement.innerHTML = today.toLocaleDateString("en-us", options);
 
 //STORAGE
-//Check  if there is data
+
+//Get Item
+const data = localStorage.getItem('TODO');
+//Check if there is data and load it if found
+if (data) {
+    LIST = JSON.parse(data);
+    id = LIST.length()
+    loadList(LIST)
+} else {
+    LIST = [];
+    id = 0;
+}
+
+
+
+//The load list function to add the items to UI
+loadList = (array) => {
+    array.forEach(element => {
+        add_todo(element.todo, element.id, element.done, element.trash);
+
+    });
+}
+
 
 
 //Add to do
