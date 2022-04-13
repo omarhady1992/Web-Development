@@ -10,6 +10,10 @@ const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-o";
 const lineThrough = "line-through";
 
+//Variables
+
+let LIST, id;
+
 
 
 //show today's day
@@ -19,17 +23,17 @@ dateelement.innerHTML = today.toLocaleDateString("en-us", options);
 
 
 //Add to do
-function add_todo(todo, id, done, trash) {
+function add_todo(todo, id = 0, done = false, trash = false) {
 
     if (trash) { return; }
     const DONE = done ? CHECK : UNCHECK;
-    const LINE = done ? CHECK : UNCHECK;
+    const LINE = done ? lineThrough : "";
 
     const item = ` <li class="item" id=${id}>
      <div><i class="fa ${DONE} co" job="complete"></i></div>
      <p class="text ${LINE}">${todo} </p>
      <div class="delete">
-         <i class="fa fa-trash-o" job="delete"></i></div></li>
+         <i class="fa fa-trash-o de" job="delete"></i></div></li>
      
      `;
     const position = "beforeend";
@@ -39,22 +43,23 @@ function add_todo(todo, id, done, trash) {
 }
 
 input.addEventListener("keyup", (e) => {
-            if (e.key == 13) {
-                const todo = input.value;
-                if (todo) {
-                    add_todo(todo, id, done, trash);
-                    LIST.push({}
-                    })
+    if (e.key == "Enter") {
+        const todo = input.value;
+        if (todo) {
+            add_todo(todo, id, false, false);
+            LIST.push({
+                todo: todo,
+                id: id,
+                done: false,
+                trash: false,
+            })
+        }
+    }
+});
 
+//Remove Todo
 
-
-
-                //store todo 
-
-
-
-                //remove to do
-
-
-
-                //update to do
+function removetodo(element) {
+    element.parentNode.parentNode.removeChild(element.parentNode);
+    LIST[element.id].trash = true;
+}
