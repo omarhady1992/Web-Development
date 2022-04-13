@@ -42,8 +42,8 @@ function add_todo(todo, id, done = false, trash = false) {
     const position = "beforeend";
     //insert adjacent elements
     list.insertAdjacentHTML(position, item);
-    //add to local storage
-    localStorage.setItem("TODO", JSON.stringify(LIST);)
+
+
 
 
 
@@ -59,8 +59,14 @@ input.addEventListener("keyup", (e) => {
                 id: id,
                 done: false,
                 trash: false,
-            })
+            });
+
+            //add to local storage
+            localStorage.setItem("TODO", JSON.stringify(LIST));
+
+            id++
         }
+        input.value = "";
     }
 });
 
