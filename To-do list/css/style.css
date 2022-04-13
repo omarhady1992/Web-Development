@@ -107,14 +107,14 @@ body {
     color: #ccc;
 }
 
-.item .delete {
+.item .de {
     position: absolute;
     font-size: 25px;
     right: 15px;
     top: 10px;
 }
 
-.item .delete:hover {
+.item .de:hover {
     color: #af0000;
     cursor: pointer;
 }

@@ -8,7 +8,7 @@ const input = document.getElementById("input_item");
 //classes
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-o";
-const lineThrough = "line-through";
+const lineThrough = "lineThrough";
 
 //Variables
 
@@ -23,20 +23,6 @@ dateelement.innerHTML = today.toLocaleDateString("en-us", options);
 
 //STORAGE
 
-//Get Item
-const data = localStorage.getItem('TODO');
-//Check if there is data and load it if found
-if (data) {
-    LIST = JSON.parse(data);
-    id = LIST.length()
-    loadList(LIST)
-} else {
-    LIST = [];
-    id = 0;
-}
-
-
-
 //The load list function to add the items to UI
 loadList = (array) => {
     array.forEach(element => {
@@ -44,6 +30,19 @@ loadList = (array) => {
 
     });
 }
+
+//Get Item
+const data = localStorage.getItem('TODO');
+//Check if there is data and load it if found
+if (data) {
+    LIST = JSON.parse(data);
+    id = LIST.length;
+    loadList(LIST)
+} else {
+    LIST = [];
+    id = 0;
+}
+
 
 //Clear local storage
 clear.addEventListener("click", function() {
@@ -59,13 +58,12 @@ function add_todo(todo, id, done = false, trash = false) {
     const DONE = done ? CHECK : UNCHECK;
     const LINE = done ? lineThrough : "";
 
-    const item = ` <li class="item" id=${id}>
-     <div><i class="fa ${DONE} co" job="complete"></i></div>
-     <p class="text ${LINE}">${todo} </p>
-     <div class="delete">
-         <i class="fa fa-trash-o de" job="delete"></i></div></li>
-     
-     `;
+    const item = `<li class="item">
+    <i class="fa ${DONE} co" job="complete" id="${id}"></i>
+    <p class="text ${LINE}">${todo}</p>
+    <i class="fa fa-trash-o de" job="delete" id="${id}"></i>
+  </li>
+`;
     const position = "beforeend";
     //insert adjacent elements
     list.insertAdjacentHTML(position, item);
@@ -100,13 +98,14 @@ function removetodo(element) {
 }
 // Complete todo
 completetodo = (element) => {
-        element.classlist.toggle(CHECK);
-        element.classlist.toggle(UNCHECK);
-        element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
+    element.classList.toggle(CHECK);
+    element.classList.toggle(UNCHECK);
+    element.parentNode.querySelector(".text").classList.toggle(lineThrough);
 
-        LIST[element.id].done = LIST[element.id].done ? false : true;
-    }
-    //Target dynamic element
+    LIST[element.id].done = LIST[element.id].done ? false : true;
+}
+
+//Target dynamic element
 list.addEventListener("click", (e) => {
     const element = e.target;
     const job = element.attributes.job.value;
