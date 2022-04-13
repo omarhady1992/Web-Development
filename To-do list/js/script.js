@@ -45,6 +45,11 @@ loadList = (array) => {
     });
 }
 
+//Clear local storage
+clear.addEventListener("click", function() {
+    localStorage.clear();
+    location.reload();
+});
 
 
 //Add to do
@@ -64,11 +69,6 @@ function add_todo(todo, id, done = false, trash = false) {
     const position = "beforeend";
     //insert adjacent elements
     list.insertAdjacentHTML(position, item);
-
-
-
-
-
 }
 
 input.addEventListener("keyup", (e) => {
@@ -86,7 +86,7 @@ input.addEventListener("keyup", (e) => {
             //add to local storage
             localStorage.setItem("TODO", JSON.stringify(LIST));
 
-            id++
+            id++;
         }
         input.value = "";
     }
